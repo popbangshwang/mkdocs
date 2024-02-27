@@ -14,11 +14,6 @@ Repo-root
 -README.md
 ```
 
-Create a directory to house the container
-
-```
-sudo mkdir /opt/mkdocs & cd /opt/mkdocs
-```
 
 Clone the repo (replace the repo with your own copy)
 
