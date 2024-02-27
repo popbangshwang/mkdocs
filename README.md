@@ -18,7 +18,7 @@ Repo-root
 Clone the repo (replace the repo with your own copy)
 
 ```
-sudo git clone https://github.com/Xyic0re/mkdocs.git
+sudo git clone https://github.com/Xyic0re/mkdocs.git && cd mkdocs
 ```
 
 Basic authentication is configured for nginx - this allows for password protecting the static content
