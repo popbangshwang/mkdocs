@@ -38,13 +38,13 @@ sudo apt install apache2-utils
 To generate the an encrypted .htpasswd file
 
 ```
-sudo htpasswd -c /etc/nginx/.htpasswd username
+sudo htpasswd -c .htpasswd username
 ```
 
 To add additional users, leave out the `-c`
 
 ```
-sudo htpasswd /etc/nginx/.htpasswd another_user
+sudo htpasswd .htpasswd another_user
 ```
 
 Make `run.sh` executable
