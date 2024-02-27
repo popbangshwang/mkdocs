@@ -20,7 +20,7 @@ Create a directory to house the container
 sudo mkdir /opt/mkdocs & cd /opt/mkdocs
 ```
 
-Clone the repo
+Clone the repo (replace the repo with your own copy)
 
 ```
 sudo git clone https://github.com/Xyic0re/mkdocs.git
