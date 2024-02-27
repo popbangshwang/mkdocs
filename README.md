@@ -1,8 +1,8 @@
 # Mkdocs-material custom container
 
 The repo should be structured this way:
-```
-docs
+
+```docs
   - mdffiles go here
 docker-compose.yml
 Dockerfile
