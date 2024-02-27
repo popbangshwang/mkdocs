@@ -43,7 +43,8 @@ sudo htpasswd -c /etc/nginx/.htpasswd username
 
 To add additional users, leave out the `-c`
 
-```sudo htpasswd /etc/nginx/.htpasswd another_user
+```
+sudo htpasswd /etc/nginx/.htpasswd another_user
 ```
 
 Make `run.sh` executable
@@ -54,5 +55,6 @@ sudo chmod +x run.sh
 
 To run the container
 
-```sudo ./run.sh
+```
+sudo ./run.sh
 ```
