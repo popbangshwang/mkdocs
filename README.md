@@ -24,7 +24,7 @@ Clone the repo
 
 Basic authentication is configured for nginx - this allows for password protecting the static content
 
-Generate the .htpasswd file with:
+Install apache2-utils to generate the .htpasswd file:
 
 ```
 sudo apt update
