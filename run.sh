@@ -8,6 +8,6 @@ rm -rf docs
 # remove previous version of the git clone
 rm -rf mkdocs
 # clone the repo for the latest version of the docs
-git clone https://github.com/Xyic0re/mkdocs.git
+git clone $1
 # bring up the mkdocs container using the docker-compose.yml
-docker compose up
+docker compose up -d

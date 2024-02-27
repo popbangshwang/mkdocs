@@ -54,8 +54,8 @@ Make `run.sh` executable
 sudo chmod +x run.sh
 ```
 
-To run the container
+To run the container (arg1 is the git repo to clone)
 
 ```
-sudo ./run.sh
+sudo ./run.sh https://github.com/Xyic0re/mkdocs.git
 ```
