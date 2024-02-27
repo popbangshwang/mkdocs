@@ -20,6 +20,10 @@ Clone the repo - replace PAT, username and repo (https://github.com/Xyic0re/mkdo
  - 'username' with your repo username
  - 'repo' with the repositories name
 
+```
+sudo git clone https://<PAT>@github.com/username/repo.git && cd mkdocs
+```
+
 *Secure the directory*
 
 Add yourself to the docker group
@@ -36,8 +40,6 @@ sudo chown -R root:docker ./mkdocs
 sudo chmod -R 750 ./mkdocs
 ```
 
-sudo git clone https://<PAT>@github.com/username/repo.git && cd mkdocs
-```
 
 Basic authentication is configured for nginx - this allows for password protecting the static content
 
@@ -51,13 +53,13 @@ sudo apt install apache2-utils openssl
 To generate the an encrypted .htpasswd file
 
 ```
-sudo htpasswd -c .htpasswd username
+htpasswd -c .htpasswd username
 ```
 
 To add additional users, leave out the `-c`
 
 ```
-sudo htpasswd .htpasswd another_user
+htpasswd .htpasswd another_user
 ```
 
 Generate self signed certificate with openssl for use with nginx (CN is important - must be the host IP or FQDN)
@@ -69,11 +71,11 @@ sudo openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out nginx
 Make `run.sh` executable
 
 ```
-sudo chmod +x run.sh
+chmod +x run.sh
 ```
 
 To run the container (arg1 is the git repo to clone)
 
 ```
-sudo ./run.sh https://<PAT>@github.com/username/repo.git
+./run.sh https://<PAT>@github.com/username/repo.git
 ```
