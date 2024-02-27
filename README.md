@@ -20,7 +20,22 @@ Clone the repo - replace PAT, username and repo (https://github.com/Xyic0re/mkdo
  - 'username' with your repo username
  - 'repo' with the repositories name
 
+*Secure the directory*
+
+Add yourself to the docker group
+
 ```
+sudo usermod -aG docker $USER
+```
+
+```
+sudo chown -R root:docker ./mkdocs
+```
+
+```
+sudo chmod -R 750 ./mkdocs
+```
+
 sudo git clone https://<PAT>@github.com/username/repo.git && cd mkdocs
 ```
 
