@@ -1,4 +1,4 @@
-# Mkdocs-material custom container
+# Mkdocs-material custom container with nginx/basic auth/ssl - self signed
 
 The repo should be structured this way:
 
