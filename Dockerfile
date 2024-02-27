@@ -25,6 +25,8 @@ WORKDIR /app
 COPY ./mkdocs/mkdocs.yml /app/mkdocs/mkdocs.yml
 COPY ./mkdocs/docs/* /app/mkdocs/docs/
 COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx-certificate.crt /etc/nginx/certificate/nginx-certificate.crt
+COPY ./nginx.key /etc/nginx/certificate/nginx.key
 COPY ./.htpasswd /etc/nginx/.htpasswd
 
 # change workdir for the mkdocs build process
