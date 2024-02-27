@@ -3,22 +3,25 @@
 The repo should be structured this way:
 
 ```
-Repo-root
---docs
-  -mdffiles go here
--docker-compose.yml
--Dockerfile
--nginx.conf
--.htpasswd
--run.sh
--README.md
+.
+├─ docs/
+│  └─ index.md
+└─ mkdocs.yml
+└─ docker-compose.yml
+└─ Dockerfile
+└─ nginx.conf
+└─ .htpasswd
+└─ run.sh
+└─ README.md
 ```
 
-
-Clone the repo (replace the repo with your own copy)
+Clone the repo - replace PAT, username and repo (https://github.com/Xyic0re/mkdocs.git)
+ - 'PAT' with personal access token
+ - 'username' with your repo username
+ - 'repo' with the repositories name
 
 ```
-sudo git clone https://github.com/Xyic0re/mkdocs.git && cd mkdocs
+sudo git clone https://<PAT>@github.com/username/repo.git && cd mkdocs
 ```
 
 Basic authentication is configured for nginx - this allows for password protecting the static content
@@ -57,5 +60,5 @@ sudo chmod +x run.sh
 To run the container (arg1 is the git repo to clone)
 
 ```
-sudo ./run.sh https://github.com/Xyic0re/mkdocs.git
+sudo ./run.sh https://<PAT>@github.com/username/repo.git
 ```
