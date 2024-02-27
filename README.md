@@ -33,11 +33,11 @@ sudo usermod -aG docker $USER
 ```
 
 ```
-sudo chown -R root:docker ./mkdocs
+sudo chown -R root:docker ../mkdocs
 ```
 
 ```
-sudo chmod -R 750 ./mkdocs
+sudo chmod -R 750 ../mkdocs
 ```
 
 
