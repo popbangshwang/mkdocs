@@ -1,3 +1,3 @@
 # Congratulations!
 *Welcome to Mkdocs-material*
-test
+test 2
