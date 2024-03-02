@@ -1,4 +1,4 @@
 # Congratulations!
 *Welcome to Mkdocs-material*
 
-test 7
+test 8
