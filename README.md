@@ -4,15 +4,15 @@ The repo should be structured this way:
 
 ```
 .
-├─ docs/
-│  └─ index.md
-└─ mkdocs.yml
-└─ docker-compose.yml
-└─ Dockerfile
-└─ nginx.conf
-└─ .htpasswd
-└─ run.sh
-└─ README.md
+├── docs/
+│  └── index.md
+├── mkdocs.yml
+├── docker-compose.yml
+├── Dockerfile
+├── nginx.conf
+├── .htpasswd
+├── run.sh
+├── README.md
 ```
 
 Clone the repo - replace PAT, username and repo (https://github.com/Xyic0re/mkdocs.git)
