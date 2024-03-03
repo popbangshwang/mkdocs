@@ -16,12 +16,12 @@
 ├── README.md
 ```
 
+***Some/all of these commands may require 'sudo' depending on your environment***
+
 Clone the repo - replace 'PAT', 'username' and 'repo' to match (https://GEdsfasds38212fda@github.com/Xyic0re/mkdocs.git)
  - 'PAT' with personal access token
  - 'username' with your repo username
  - 'repo' with the repositories name
-
-***Some/all of these commands may require 'sudo' depending on your environment***
 
 ```
 git clone https://<PAT>@github.com/<username>/<repo>.git && cd mkdocs
