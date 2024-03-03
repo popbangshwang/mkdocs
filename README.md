@@ -6,8 +6,10 @@ The repo should be structured this way:
 .
 ├── docs/
 │  └── index.md
+|  └── <additional docs go here>
 ├── mkdocs.yml
-├── docker-compose.yml
+├── mkdocs.sh
+├── webhook.js
 ├── Dockerfile
 ├── nginx.conf
 ├── .htpasswd
