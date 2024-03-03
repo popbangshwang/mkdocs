@@ -1,6 +1,6 @@
 #!/bin/bash
 # set first_run=0 to run setup
-first_run=1
+first_run=0
 
 if [ $first_run -eq 0 ]; then
   if [ $(grep -c 'git clone' ./mkdocs.sh) -eq 1 ]; then
