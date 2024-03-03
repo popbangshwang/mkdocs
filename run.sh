@@ -3,8 +3,6 @@
 first_run=0
 
 
-
-
 if [ $first_run -eq 0 ]; then
  if [ $(grep -c 'git clone' ./mkdocs.sh) -eq 1 ]; then
   printf '(skipped) - mkdocs.sh already contains repo information - edit manually and remove line 13\n'
@@ -34,8 +32,8 @@ if [ $first_run -eq 0 ]; then
  
   printf 'Generating self signed ssl certificate\n'
   read -rp "Populating 'CN' field - enter your FQDN or host's IP: " CN_field
-  sudo openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out nginx-certificate.crt -keyout nginx.key -subj "/C=AU/ST=QLD/L=Brisbane/O=Glo> 
- printf 'Done... building image\n'
+  openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out nginx-certificate.crt -keyout nginx.key -subj "/C=AU/ST=QLD/L=Brisbane/O=Global Security/OU=IT Department/CN=$CN_field" 
+  printf 'Done... building image\n'
   docker stop mkdocs
   docker container remove mkdocs
   docker image remove mkdocs
@@ -47,6 +45,7 @@ read -rp "Do you want to run the container now? (y/N): " runit
  if [[ "$runit" =~ ^([yY][eE][sS]|[yY])$ ]]; then
   docker run -d --name mkdocs --mount type=volume,target=/opt/mkdocs --publish 443:443/tcp --publish 80:80/tcp --publish 8080:8080/tcp mkdocs
  else
-  printf 'You can run the container with this script or using docker run with: \n docker run -d --name mkdocs --mount type=volume,target=/opt/mkdocs --pu> fi
+  printf 'You can run the container with this script or using docker run with: \n docker run -d --name mkdocs --mount type=volume,target=/opt/mkdocs --publish 443:443/tcp --publish 80:80/tcp --publish 8080:8080/tcp mkdocs'
+ fi
 # Set first_run to 1 - subsequent runs will not perform setup tasks
  sed -i "3 s#first_run=0#first_run=1\n#" ./run.sh
