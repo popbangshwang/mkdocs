@@ -16,7 +16,7 @@
 ├── README.md
 ```
 
-<span style="color:red"> ***Some/all of these commands may require 'sudo' depending on your environment*** </span>
+***Some/all of these commands may require 'sudo' depending on your environment***
 
 Clone the repo - replace 'PAT', 'username' and 'repo' to match (https://GEdsfasds38212fda@github.com/Xyic0re/mkdocs.git)
  - 'PAT' with personal access token
