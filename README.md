@@ -21,7 +21,7 @@ Clone the repo - replace 'PAT', 'username' and 'repo' to match (https://GEdsfasd
  - 'username' with your repo username
  - 'repo' with the repositories name
 
-*some of these setup commands may require 'sudo' depending on your environment*
+***Some/all of these commands may require 'sudo' depending on your environment***
 
 ```
 git clone https://<PAT>@github.com/<username>/<repo>.git && cd mkdocs
