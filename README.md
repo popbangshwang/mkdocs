@@ -23,11 +23,11 @@ Clone the repo - replace 'PAT', 'username' and 'repo' to match (https://GEdsfasd
  - 'username' with your repo username
  - 'repo' with the repositories name
 
-```
+```bash
 git clone https://<PAT>@github.com/<username>/<repo>.git && cd mkdocs
 ```
 Public repo
-```
+```bash
 git clone https://github.com/<username>/<repo>.git && cd mkdocs
 ```
 
@@ -37,11 +37,20 @@ git clone https://github.com/<username>/<repo>.git && cd mkdocs
 ## Running and setup
 
 **Setup**
-```
+
+Create a Github webhook - if you're using ngrok replace 'Payload URL' with ngrok address eg: https://91f1-226-13-123-216.ngrok-free.app (without the 8080 since this is done in you ngrok setup)
+ - make sure you have 8080 opened on you firewall or 443 if you're using ngrok
+ - Content type: application/json
+ - Secret: enter a secret for this webhook
+ - Which events: just the push event
+ - Active: tick
+![alt text](image.png)
+
+```bash
 chmod +x run.sh && ./run.sh
 ```
 
 **Running**
-```
+```bash
 ./run.sh
 ```
