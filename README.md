@@ -1,4 +1,4 @@
-# Mkdocs-material custom container with nginx/basic auth/ssl - self signed/webhook for pushes and auto mkdocs rebuild
+# Mkdocs-material docker container with nginx/basic auth/ssl - self signed/webhook for pushes and auto mkdocs rebuild
 
 **The repo should be structured this way:**
 
