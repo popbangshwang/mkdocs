@@ -34,9 +34,7 @@ git clone https://github.com/<username>/<repo>.git && cd mkdocs
 **This container requires apache2-utils and openssl to generate the .htpasswd file and self signed ssl certificate:** 
   - 'run.sh' can use 'apt install' to install these.
 
-## Running and setup
-
-**Setup**
+## Setup and Run
 
 Create a Github webhook - if you're using ngrok replace 'Payload URL' with ngrok address eg: https://91f1-226-13-123-216.ngrok-free.app (without the 8080 since this is done in you ngrok setup)
  - make sure you have 8080 opened on you firewall or 443 if you're using ngrok
@@ -50,7 +48,7 @@ Create a Github webhook - if you're using ngrok replace 'Payload URL' with ngrok
 chmod +x run.sh && ./run.sh
 ```
 
-**Running**
+**Run**
 ```bash
 ./run.sh
 ```
