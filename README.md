@@ -31,7 +31,8 @@ Public repo
 git clone https://github.com/<username>/<repo>.git && cd mkdocs
 ```
 
-**This container requires apache2-utils and openssl to generate the .htpasswd file and self signed ssl certificate:** - run.sh can use apt install to install these
+**This container requires apache2-utils and openssl to generate the .htpasswd file and self signed ssl certificate:** 
+  - 'run.sh' can use 'apt install' to install these.
 
 ## Running and setup
 
