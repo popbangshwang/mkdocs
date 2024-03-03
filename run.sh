@@ -81,4 +81,5 @@ else
 fi
 # Set first_run to 1 - subsequent runs will not perform setup tasks
  printf "Setup complete - setting 'first_run=1' reset this to zero to rerun setup\n"
+ printf 'You can run the container with this script or using docker run with: \n docker run -d --name mkdocs --mount type=volume,target=/opt/mkdocs --publish 443:443/tcp --publish 80:80/tcp --publish 8080:8080/tcp mkdocs\n'
  sed -i "3 s#first_run=0#first_run=1#" ./run.sh
