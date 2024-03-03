@@ -1,5 +1,7 @@
 # Mkdocs-material docker container with nginx/basic auth/ssl - self signed/webhook for pushes and auto mkdocs rebuild
 
+### https://squidfunk.github.io/mkdocs-material/
+
 **The repo should be structured this way:**
 
 ```
