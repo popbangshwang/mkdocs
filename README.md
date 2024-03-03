@@ -16,13 +16,19 @@
 ├── README.md
 ```
 
-Clone the repo - replace <PAT>, <username> and <repo> to match (https://github.com/Xyic0re/mkdocs.git)
+Clone the repo - replace 'PAT', 'username' and 'repo' to match (https://GEdsfasds38212fda@github.com/Xyic0re/mkdocs.git)
  - 'PAT' with personal access token
  - 'username' with your repo username
  - 'repo' with the repositories name
 
+*some of these setup commands may require 'sudo' depending on your environment*
+
 ```
 git clone https://<PAT>@github.com/<username>/<repo>.git && cd mkdocs
+```
+Public repo
+```
+git clone https://github.com/<username>/<repo>.git && cd mkdocs
 ```
 
 **This container requires apache2-utils and openssl to generate the .htpasswd file and self signed ssl certificate:** - run.sh can use apt install to install these
