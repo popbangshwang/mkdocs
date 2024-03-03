@@ -4,6 +4,8 @@ FROM nginx:alpine
 RUN apk add --no-cache \
     python3 \
     py3-pip \
+    nodejs \
+    git \
 # Install Build dependencies (for some mkdocs requirements)
   && apk add --no-cache --virtual .build-deps \
 #      build-base \
@@ -18,18 +20,13 @@ RUN apk add --no-cache \
   && rm -rf "$HOME/.cache" \
   && apk del .build-deps
 
-# set the workdir for creation of the mkdocs environment
-WORKDIR /app
+# Copy in nginx configuration files
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx-certificate.crt /etc/nginx/certificate/nginx-certificate.crt
+COPY nginx.key /etc/nginx/certificate/nginx.key
+COPY .htpasswd /etc/nginx/.htpasswd
 
-# copy in files from the host
-COPY ./mkdocs/mkdocs.yml /app/mkdocs/mkdocs.yml
-COPY ./mkdocs/docs/* /app/mkdocs/docs/
-COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY ./nginx-certificate.crt /etc/nginx/certificate/nginx-certificate.crt
-COPY ./nginx.key /etc/nginx/certificate/nginx.key
-COPY ./.htpasswd /etc/nginx/.htpasswd
-
-# change workdir for the mkdocs build process
-WORKDIR /app/mkdocs
-
-RUN mkdocs build
+# Copy in webhook and startup script
+COPY webhook.js /opt/webhook/webhook.js
+COPY mkdocs.sh /docker-entrypoint.d/40-mkdocs.sh
+RUN chmod +x /docker-entrypoint.d/40-mkdocs.sh
