@@ -8,17 +8,17 @@ import subprocess
 
 webhook = Flask(__name__)
 
+# Get rand_var from environment variable
 rand_cmd = subprocess.check_output(["echo $RAND_VAR"], shell=True, encoding="utf-8")
 rand_var=str(rand_cmd).strip()
-print("rand_var")
-print(rand_var)
+#print("rand_var")
+#print(rand_var)
 
 # Run 'echo' and pipe the output to 'openssl'
-echo_cmd = subprocess.Popen(["echo $CRYPT_SECRET"], shell=True, stdout=subprocess.PIPE)
-print(echo_cmd.stdout)
-
+secret_cmd = subprocess.Popen(["echo $CRYPT_SECRET"], shell=True, stdout=subprocess.PIPE)
+#print(secret_cmd.stdout)
 # Run 'openssl' and pipe the output of 'echo' to it
-openssl_cmd = subprocess.check_output(["openssl", "enc", "-aes-256-ctr", "-pbkdf2", "-d", "-a", "-k", rand_var], stdin=echo_cmd.stdout, encoding="utf-8")
+openssl_cmd = subprocess.check_output(["openssl", "enc", "-aes-256-ctr", "-pbkdf2", "-d", "-a", "-k", rand_var], stdin=secret_cmd.stdout, encoding="utf-8")
 secret_token=str(openssl_cmd).strip()
 #print("..")
 #print(secret_token)
@@ -27,13 +27,12 @@ secret_token=str(openssl_cmd).strip()
 def verify_signature(payload_body, secret_token, signature_header):
 
     """Verify that the payload was sent from GitHub by validating SHA256.
-
     Raise and return 403 if not authorized.
-
     Args:
         payload_body: original request body to verify (request.body())
         secret_token: GitHub app webhook token (WEBHOOK_SECRET)
         signature_header: header received from GitHub (x-hub-signature-256)
+        https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
     """
     if not signature_header:
         raise HTTPException(status_code=403, detail="x-hub-signature-256 header is missing!")
