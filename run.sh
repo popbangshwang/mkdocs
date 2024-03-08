@@ -1,6 +1,6 @@
 #!/bin/bash
 # set first_run=0 to run setup
-first_run=0
+first_run=1
 
 
 if ! [ -e ./.env ] ; then
@@ -12,24 +12,32 @@ if ! [ -w ./.env ] ; then
 fi
 
 if [ $first_run -eq 0 ]; then
+
+  if [ $(grep -c 'RAND_VAR=' ./.env) -eq 1 ]; then
+    printf '(skipped) - .env already contains "RAND_VAR" - edit manually\n'
+  else
+    printf 'Injecting repository info into ./mkdocs.sh\n'
+    rand_var=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 42; echo)
+    echo "RAND_VAR=$rand_var" >> ./.env
+    printf 'done\n'
+  fi
+
   if [ $(grep -c 'CRYPT_GIT_REPO=' ./.env) -eq 1 ]; then
-    printf '(skipped) - .env already contains repo information - edit manually and remove line "CRYPT_GIT_REPO="\n'
+    printf '(skipped) - .env already contains "CRYPT_GIT_REPO" - edit manually\n'
   else
     printf 'Injecting repository info into ./mkdocs.sh\n'
     read -rp 'Enter your repository clone address - eg: https://<PAT>@github.com/username/repo.git : ' git_address
-    crypt_git_address=$(echo $git_address | openssl enc -aes-256-ctr -A -pbkdf2 -a -k apples)
-   # sed -i "13 s#^#crypt_git_address="$crypt_git_address"\n#" ./mkdocs.sh
+    crypt_git_address=$(echo $git_address | openssl enc -aes-256-ctr -A -pbkdf2 -a -k $rand_var)
     echo "CRYPT_GIT_REPO=$crypt_git_address" >> ./.env
     printf 'done\n'
   fi
 
   if [ $(grep -c 'CRYPT_SECRET=' ./.env) -eq 1 ]; then
-    printf '(skipped) - webhook.js already contains secret - edit manually and remove line "CRYPT_SECRET="\n'
+    printf '(skipped) - .env already contains "CRYPT_SECRET" - edit manually\n'
   else
     printf 'Injecting secret into ./webhook.js\n'
     read -rp 'Enter your webhook secret ' secret
-    #sed -i "2 s#^#const webhook_secret = \""$secret"\";\n#" ./webhook.js
-    crypt_secret=$(echo $secret | openssl enc -aes-256-ctr -A -pbkdf2 -a -k oranges)
+    crypt_secret=$(echo $secret | openssl enc -aes-256-ctr -A -pbkdf2 -a -k $rand_var)
     echo "CRYPT_SECRET=$crypt_secret" >> ./.env
     printf 'done\n'
   fi
@@ -64,7 +72,7 @@ if [ $first_run -eq 0 ]; then
       printf "Added user $username to .htpasswd\n To add additional user(s) run 'htpasswd ./.htpasswd <user> or edit the file directly\n"
     fi
   else
-    printf 'Configuring basic auth for nginx - generating .htpasswd\n'
+    printf 'Configuring basic auth for nginx - generating .htpasswd\n' 
     read -rp 'Enter your user: ' username
     htpasswd -c ./.htpasswd $username
     printf "Added user $username to .htpasswd\n To add additional user(s) run 'htpasswd ./.htpasswd <user> or edit the file directly\n"
@@ -96,6 +104,5 @@ fi
 # Set first_run to 1 - subsequent runs will not perform setup tasks
  printf '\n'
  printf "Setup complete - setting 'first_run=1' reset this to zero to rerun setup\n"
- printf 'You can run the container with this script or using docker run with: \n docker run -d --env-file=./.env --name mkdocs --mount type=volume,target=/opt/mkdocs --publish 4
-43:443/tcp --publish 80:80/tcp --publish 8080:8080/tcp mkdocs\n'
+ printf 'You can run the container with this script or using docker run with: \n docker run -d --env-file=./.env --name mkdocs --mount type=volume,target=/opt/mkdocs --publish 443:443/tcp --publish 80:80/tcp --publish 8080:8080/tcp mkdocs\n'
  sed -i "3 s#first_run=0#first_run=1#" ./run.sh

@@ -9,7 +9,7 @@ entrypoint_log() {
 }
 
 # perform the initial clone and build for mkdocs
-GIT_REPO=$(echo $CRYPT_GIT_REPO | openssl enc -aes-256-ctr -pbkdf2 -a -k apples -d)
+GIT_REPO=$(echo $CRYPT_GIT_REPO | openssl enc -aes-256-ctr -pbkdf2 -a -k $RAND_VAR -d)
 git clone $GIT_REPO /opt/mkdocs && cd /opt/mkdocs && mkdocs build
 
 # run the weblistner on port 8080 for github pushes

@@ -9,17 +9,21 @@ import subprocess
 
 webhook = Flask(__name__)
 
-#API_SECRET_KEY = 'my_webhook_api_secret'
+rand_cmd = subprocess.check_output(["echo $RAND_VAR"], shell=True, encoding="utf-8")
+rand_var=str(rand_cmd).strip()
+print("rand_var")
+print(rand_var)
+
 # Run 'echo' and pipe the output to 'openssl'
 echo_cmd = subprocess.Popen(["echo $CRYPT_SECRET"], shell=True, stdout=subprocess.PIPE)
 print(echo_cmd.stdout)
 
 # Run 'openssl' and pipe the output of 'echo' to it
-#openssl_cmd = subprocess.Popen(["openssl", "enc", "-aes-256-ctr", "-pbkdf2", "-d", "-a", "-k", "oranges"], stdin=echo_cmd.stdout, stdout=subprocess.PIPE, encoding="utf-8")     
-openssl_cmd = subprocess.check_output(["openssl", "enc", "-aes-256-ctr", "-pbkdf2", "-d", "-a", "-k", "oranges"], stdin=echo_cmd.stdout, encoding="utf-8")
-#stdout, stderr = openssl_cmd.communicate()
-#secret_token=str(stdout).strip()
-secret_token=str(openssl_cmd).strip()
+openssl_cmd = subprocess.Popen(["openssl", "enc", "-aes-256-ctr", "-pbkdf2", "-d", "-a", "-k", "oranges"], stdin=echo_cmd.stdout, stdout=subprocess.PIPE, encoding="utf-8")      
+#openssl_cmd = subprocess.check_output(["openssl", "enc", "-aes-256-ctr", "-pbkdf2", "-d", "-a", "-k", rand_var], stdin=echo_cmd.stdout, encoding="utf-8")
+stdout, stderr = openssl_cmd.communicate()
+secret_token=str(stdout).strip()
+#secret_token=str(openssl_cmd).strip()
 print("..")
 print(secret_token)
 print("...")
@@ -51,7 +55,7 @@ def verify_signature(payload_body, secret_token, signature_header):
 #        raise HTTPException(status_code=403, detail="Request signatures didn't match!")
     return hmac.compare_digest(expected_signature, signature_header)
 
-@webhook.route('/', methods=['POST'])
+@webhook.route('/hooked', methods=['POST'])
 def handle_webhook():
                 # Get raw body
     payload_body = request.get_data()
