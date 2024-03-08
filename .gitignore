@@ -1,0 +1,4 @@
+stopit.sh
+nginx.key
+nginx-certificate.crt
+.env
