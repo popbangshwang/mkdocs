@@ -38,7 +38,7 @@ git clone https://github.com/<username>/<repo>.git && cd mkdocs
 
 ## Setup and Run
 
-Create a Github webhook - if you're using ngrok replace 'Payload URL' with ngrok address eg: https://91f1-226-13-123-216.ngrok-free.app (without the 8080 since this is done in you ngrok setup)
+Create a Github webhook - if you're using ngrok replace 'Payload URL' with ngrok address eg: https://91f1-226-13-123-216.ngrok-free.app/hooked (without the 8080 since this is done in you ngrok setup)
  - webhook Payload URL - https//FQDN/hooked  - **/hooked is important**
  - make sure you have 8080 opened on you firewall
  - Content type: application/json
