@@ -1,4 +1,4 @@
-# Mkdocs-material docker container with nginx/basic auth/ssl - self signed/webhook for pushes and auto mkdocs rebuild
+# Lightweight +-200MB Mkdocs-material docker container with nginx/basic auth/ssl - self signed/webhook for pushes and auto mkdocs rebuild
 
 ### https://squidfunk.github.io/mkdocs-material/
 
@@ -11,7 +11,7 @@
 |  └── <additional docs go here>
 ├── mkdocs.yml
 ├── mkdocs.sh
-├── webhook.js
+├── webhook.py
 ├── Dockerfile
 ├── nginx.conf
 ├── run.sh
@@ -38,13 +38,14 @@ git clone https://github.com/<username>/<repo>.git && cd mkdocs
 
 ## Setup and Run
 
-Create a Github webhook - if you're using ngrok replace 'Payload URL' with ngrok address eg: https://91f1-226-13-123-216.ngrok-free.app (without the 8080 since this is done in you ngrok setup)
+Create a Github webhook - if you're using ngrok replace 'Payload URL' with ngrok address eg: https://91f1-226-13-123-216.ngrok-free.app/hooked (without the 8080 since this is done in you ngrok setup)
+ - webhook Payload URL - https//FQDN/hooked  - **/hooked is important**
  - make sure you have 8080 opened on you firewall
  - Content type: application/json
  - Secret: enter a secret for this webhook
  - Which events: just the push event
  - Active: tick
-![alt text](image.png)
+![alt text](image-1.png)
 
 ```bash
 chmod +x run.sh && ./run.sh
@@ -54,3 +55,8 @@ chmod +x run.sh && ./run.sh
 ```bash
 ./run.sh
 ```
+
+## Extras
+
+ - replace nginx-certificate.crt with your own crt if you have it
+ - mkdocs plugins can be installed - modify mkdocs.yml and Dockerfile for pip install <plugin>
