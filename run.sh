@@ -16,7 +16,7 @@ if [ $first_run -eq 0 ]; then
   if [ $(grep -c 'RAND_VAR=' ./.env) -eq 1 ]; then
     printf '(skipped) - .env already contains "RAND_VAR" - edit manually\n'
   else
-    printf 'Injecting repository info into ./mkdocs.sh\n'
+    printf 'Injecting RAND_VAR into .env\n'
     rand_var=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 42; echo)
     echo "RAND_VAR=$rand_var" >> ./.env
     printf 'done\n'
@@ -25,7 +25,7 @@ if [ $first_run -eq 0 ]; then
   if [ $(grep -c 'CRYPT_GIT_REPO=' ./.env) -eq 1 ]; then
     printf '(skipped) - .env already contains "CRYPT_GIT_REPO" - edit manually\n'
   else
-    printf 'Injecting repository info into ./mkdocs.sh\n'
+    printf 'Injecting CRYPT_GIT_REPO into ./env\n'
     read -rp 'Enter your repository clone address - eg: https://<PAT>@github.com/username/repo.git : ' git_address
     crypt_git_address=$(echo $git_address | openssl enc -aes-256-ctr -A -pbkdf2 -a -k $rand_var)
     echo "CRYPT_GIT_REPO=$crypt_git_address" >> ./.env
@@ -35,7 +35,7 @@ if [ $first_run -eq 0 ]; then
   if [ $(grep -c 'CRYPT_SECRET=' ./.env) -eq 1 ]; then
     printf '(skipped) - .env already contains "CRYPT_SECRET" - edit manually\n'
   else
-    printf 'Injecting secret into ./webhook.js\n'
+    printf 'Injecting CRYPT_SECRET into .env\n'
     read -rp 'Enter your webhook secret ' secret
     crypt_secret=$(echo $secret | openssl enc -aes-256-ctr -A -pbkdf2 -a -k $rand_var)
     echo "CRYPT_SECRET=$crypt_secret" >> ./.env
@@ -53,13 +53,15 @@ if [ $first_run -eq 0 ]; then
   if [[ -f ./nginx-certificate.crt ]]; then
     read -rp 'nginx-certificate.crt already exists - do you wish to regenerate it? (y/N):' regenerate_cert
     if [[ "$regenerate_cert" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+      printf '\n'
       printf 'Generating self signed ssl certificate\n'
       read -rp "Populating 'CN' field - enter your FQDN or host's IP: " CN_field
       openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out nginx-certificate.crt -keyout nginx.key -subj "/C=AU/ST=QLD/L=Brisbane/O=Global Security/OU=IT Department/CN=$CN_field"
     fi
   else
+    printf '\n'
     printf 'Generating self signed ssl certificate\n'
-    read -rp "Populating 'CN' field - enter your FQDN or host's IP: " CN_field
+    read -rp "Populating 'CN' field - enter your FQDN or host's IP (local IP if using ngrok): " CN_field
     openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out nginx-certificate.crt -keyout nginx.key -subj "/C=AU/ST=QLD/L=Brisbane/O=Global Security/OU=IT Department/CN=$CN_field"
   fi
 
