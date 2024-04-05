@@ -18,22 +18,38 @@
 ├── README.md
 ```
 
-***Some/all of these commands may require 'sudo' depending on your environment***
+
+**Clone and make it your own**
 
 Clone the repo - replace 'PAT', 'username' and 'repo' to match (https://GEdsfasds38212fda@github.com/Xyic0re/mkdocs.git)
  - 'PAT' with personal access token
  - 'username' with your repo username
  - 'repo' with the repositories name
 
+***This assumes your user ID is 1000***
+
 ```bash
-git clone https://<PAT>@github.com/<username>/<repo>.git && cd mkdocs
-```
-Public repo
-```bash
-git clone https://github.com/<username>/<repo>.git && cd mkdocs
+sudo mkdir mydoco && sudo chown -R 1000:1000 mydoco
 ```
 
-**This container requires apache2-utils and openssl to generate the .htpasswd file and self signed ssl certificate:** 
+```bash
+git clone -o upstream https://github.com/Xyic0re/mkdocs.git mydoco && cd mydoco
+```
+
+***on Github, create new repository called "mydoco"***
+
+```bash
+git remote add origin https://<PAT>@github.com/<username>/mydoco.git
+```
+```bash
+git push -u origin master
+```
+
+***Some/all of these commands may require 'sudo' depending on your environment***
+
+### Pre-requisites
+
+This container requires apache2-utils and openssl to generate the .htpasswd file and self signed ssl certificate:
   - 'run.sh' can use 'apt install' to install these.
 
 ## Setup and Run
