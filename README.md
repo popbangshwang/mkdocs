@@ -21,7 +21,7 @@
 
 **Clone and make it your own**
 
-Clone the repo - replace 'PAT', 'username' and 'repo' to match (https://GEdsfasds38212fda@github.com/Xyic0re/mkdocs.git)
+Clone the repo - replace 'PAT', 'username' and 'repo' to match (https://GEdsfasds38212fda@github.com/popbangshwang/mkdocs.git)
  - 'PAT' with personal access token
  - 'username' with your repo username
  - 'repo' with the repositories name
@@ -33,7 +33,7 @@ sudo mkdir mydoco && sudo chown -R 1000:1000 mydoco
 ```
 
 ```bash
-git clone -o upstream https://github.com/Xyic0re/mkdocs.git mydoco && cd mydoco
+git clone -o upstream https://github.com/popbangshwang/mkdocs.git mydoco && cd mydoco
 ```
 
 ***on Github, create new repository called "mydoco"***
